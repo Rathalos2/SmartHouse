@@ -66,7 +66,7 @@ ttk.Button(f4,text='Select a Color',command=change_color).grid(row=1,column=1)
 
 ttk.Button(f4,text='Show Date & Time',command=show_time).grid(row=2,column=1)
 
-ttk.Button(f4,text='Hide Date & Time',command=hide_time).grid(row=3,column=1)
+ttk.Button(f4,text='Hide Date & Time').grid(row=3,column=1)
 
 def do_layout():
     f1.grid(column=0, row= 0)
