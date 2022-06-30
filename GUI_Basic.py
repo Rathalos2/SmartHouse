@@ -1,9 +1,11 @@
+from cProfile import label
 from operator import index
 from optparse import Option
+from textwrap import fill
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
-
+from tkinter import ttk
 import bs4 as bs
 from bs4 import BeautifulSoup as bs
 import requests
@@ -12,6 +14,11 @@ from sqlalchemy import false
 import pandas as pd
 import time
 import json
+import tkinter as tk
+from tkinter import ttk
+from tkinter.colorchooser import askcolor
+from tkinter import *
+import datetime as dt
 
 #blablabla
 
@@ -24,11 +31,42 @@ root=tk.Tk()
 root.title("Smart Home")
 root.geometry("600x640")
 
+notebook= ttk.Notebook(root)
+notebook.grid(row=1, column=9)
 
 
-f1 = tk.Frame(root, bg="#383B38", highlightbackground= "#146D21", highlightthickness=5, width=600, height=150, bd=15)
-f2 = tk.Frame(root, bg="#383B38", highlightbackground="#146D21", highlightthickness=5, bd=15, width=600, height=150)
-f3 = tk.Frame(root, bg="#383B38", highlightbackground="#146D21", highlightthickness=5, bd=10, width=600, height=340)
+f1 = tk.Frame(notebook, bg="#383B38", highlightbackground= "#146D21", highlightthickness=5, width=600, height=150, bd=15)
+f2 = tk.Frame(notebook, bg="#383B38", highlightbackground="#146D21", highlightthickness=5, bd=15, width=600, height=150)
+f3 = tk.Frame(notebook, bg="#383B38", highlightbackground="#146D21", highlightthickness=5, bd=10, width=600, height=340)
+f4 = tk.Frame(notebook, bg="#383B38", highlightbackground="#146D21", highlightthickness=5, bd=10, width=600, height=340)
+
+
+
+def change_color():
+    colors = askcolor(title="Tkinter Color Chooser")
+    f1.configure(bg=colors[1])
+    f2.configure(bg=colors[1])
+    f3.configure(bg=colors[1])
+    f4.configure(bg=colors[1])
+
+def show_time():
+    date = dt.datetime.now()
+# Create Label to display the Date
+    global LabelTIME 
+    LabelTIME= Label(f1, text=f"{date:%A, %B %d, %Y}", font="Calibri, 14")
+    LabelTIME.grid(row=0, column=10)
+
+
+
+    
+
+
+ttk.Button(f4,text='Select a Color',command=change_color).grid(row=1,column=1)
+
+
+ttk.Button(f4,text='Show Date & Time',command=show_time).grid(row=2,column=1)
+
+ttk.Button(f4,text='Hide Date & Time',command=hide_time).grid(row=3,column=1)
 
 def do_layout():
     f1.grid(column=0, row= 0)
@@ -37,6 +75,11 @@ def do_layout():
     f2.grid_propagate(False)
     f3.grid(column=0, row= 2)
     f3.grid_propagate(False)
+    notebook.add(f1, text="TV")
+    notebook.add(f2, text="Washer")
+    notebook.add(f3, text="TV STATS")
+    notebook.add(f4, text="Settings")
+    
 
 TV1= [
     "Online : 01:04:21"
